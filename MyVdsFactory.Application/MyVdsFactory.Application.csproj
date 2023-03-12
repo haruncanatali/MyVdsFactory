@@ -9,8 +9,9 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+      <PackageReference Include="ClosedXML" Version="0.100.3" />
       <PackageReference Include="MediatR" Version="12.0.1" />
-      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.3" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
@@ -19,7 +20,6 @@
 
     <ItemGroup>
       <Folder Include="Auth\Commands" />
-      <Folder Include="Users\Queries" />
     </ItemGroup>
 
     <ItemGroup>

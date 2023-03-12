@@ -6,6 +6,10 @@ namespace MyVdsFactory.Domain.Entities;
 
 public class User : IdentityUser<long>
 {
+    public User()
+    {
+    }
+
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string RefreshToken { get; set; }

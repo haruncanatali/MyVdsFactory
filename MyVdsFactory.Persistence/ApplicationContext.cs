@@ -39,6 +39,8 @@ public class ApplicationContext : IdentityDbContext<User, Role, long, IdentityUs
             set { }
         }
 
+        public DbSet<Earthquake> Earthquakes { get; set; }
+
         #endregion
 
 

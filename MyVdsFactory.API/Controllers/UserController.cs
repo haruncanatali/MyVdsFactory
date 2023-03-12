@@ -3,21 +3,23 @@ using Microsoft.AspNetCore.Mvc;
 using MyVdsFactory.Application.Users.Commands.CreateUser;
 using MyVdsFactory.Application.Users.Commands.DeleteUser;
 using MyVdsFactory.Application.Users.Commands.UpdateUser;
+using MyVdsFactory.Application.Users.Queries.GetUser;
+using MyVdsFactory.Application.Users.Queries.GetUserList;
 using MyVdsFactory.Domain.Constants;
 
 namespace MyVdsFactory.API.Controllers;
 
 public class UserController : BaseController
 {
-    /*[HttpGet]
+    [HttpGet]
     [Route("list")]
-    [Authorize(Roles = $"{UserRoleConsts.Admin}")]
-    public async Task<ActionResult<GetUserListVm>> GetAll(string? gender, string? status)
+    //[Authorize(Roles = $"{UserRoleConsts.Admin}")]
+    public async Task<ActionResult<GetUserListVm>> GetAll(string? firstName, string? lastName)
     {
         return Ok(await Mediator.Send(new GetUserListQuery
         {
-            Status = status,
-            Gender = gender
+            FirstName = firstName,
+            LastName = lastName
         }));
     }
 
@@ -30,7 +32,7 @@ public class UserController : BaseController
         {
             Id = id
         }));
-    }*/
+    }
     
     [HttpPost]
     [Route("add")]
