@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MyVdsFactory.Application.Common.Interfaces;
 using MyVdsFactory.Application.Common.Models;
 using MyVdsFactory.Domain.Entities;
@@ -62,6 +63,7 @@ public class CreateUserCommand : IRequest<Result<long>>
                     }
 
                     await _userManager.CreateAsync(entity, password);
+
 
                     if (request.RoleNames is { Count: > 0 })
                     {

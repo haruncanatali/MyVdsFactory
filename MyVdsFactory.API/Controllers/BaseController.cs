@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MyVdsFactory.API.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
 [Route("api/[controller]")]
 public abstract class BaseController : ControllerBase
 {
