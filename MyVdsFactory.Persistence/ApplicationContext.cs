@@ -40,6 +40,8 @@ public class ApplicationContext : IdentityDbContext<User, Role, long, IdentityUs
         }
 
         public DbSet<Earthquake> Earthquakes { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<District> Districts { get; set; }
 
         #endregion
 
