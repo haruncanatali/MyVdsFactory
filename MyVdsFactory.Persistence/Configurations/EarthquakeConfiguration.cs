@@ -23,6 +23,9 @@ namespace MyVdsFactory.Persistence.Configurations
             builder.Property(c => c.Province).IsRequired();
             builder.Property(c => c.District).IsRequired();
             builder.Property(c => c.Date).IsRequired();
+            builder.Property(c => c.Year).HasDefaultValue(2006).IsRequired();
+            builder.Property(c => c.Month).HasDefaultValue(1).IsRequired();
+            builder.Property(c => c.Day).HasDefaultValue(1).IsRequired();
 
             builder.HasQueryFilter(c => c.Status == EntityStatus.Active);
         }

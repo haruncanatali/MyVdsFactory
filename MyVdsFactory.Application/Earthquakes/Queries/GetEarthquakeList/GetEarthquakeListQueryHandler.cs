@@ -27,7 +27,7 @@ namespace MyVdsFactory.Application.Earthquakes.Queries.GetEarthquakeList
         public async Task<GetEarthquakeListVm> Handle(GetEarthquakeListQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Earthquake> eartquakeQuery = _context.Earthquakes;
-
+            var sort = (request.SortBy == null || request.SortBy == "ASC") ? "ASC" : "DESC";
             
             if (request.Date != null)
             {
@@ -35,8 +35,17 @@ namespace MyVdsFactory.Application.Earthquakes.Queries.GetEarthquakeList
             }
             else if(request.StartTime != null && request.EndTime != null)
             {
-                eartquakeQuery = eartquakeQuery.Where(c =>
-                    c.Date.Date >= request.StartTime.Value.Date && c.Date.Date <= request.EndTime.Value.Date);
+                var s_Day = request.StartTime.Value.Date.Day;
+                var s_Month = request.StartTime.Value.Date.Month;
+                var s_Year = request.StartTime.Value.Date.Year;
+
+                var e_Day = request.EndTime.Value.Date.Day;
+                var e_Month = request.EndTime.Value.Date.Month;
+                var e_Year = request.EndTime.Value.Date.Year;
+                
+                eartquakeQuery = eartquakeQuery.Where(c => 
+                    c.Day >= s_Day && c.Month >= s_Month && c.Year >= s_Year &&
+                    c.Day <= e_Day && c.Month <= e_Month && c.Year <= e_Year);
             }
 
             if (request.Rms != null)
@@ -61,23 +70,25 @@ namespace MyVdsFactory.Application.Earthquakes.Queries.GetEarthquakeList
 
             if (request.Location != null)
             {
-                eartquakeQuery = eartquakeQuery.Where(c => String.Equals(c.Location, request.Location, StringComparison.CurrentCultureIgnoreCase));
+                eartquakeQuery = eartquakeQuery.Where(c => c.Location.ToLower() == request.Location.ToLower());
             }
 
             if (request.Country != null)
             {
-                eartquakeQuery = eartquakeQuery.Where(c => String.Equals(c.Country, request.Country, StringComparison.CurrentCultureIgnoreCase));
+                eartquakeQuery = eartquakeQuery.Where(c => c.Country.ToLower() == request.Country.ToLower());
             }
 
             if (request.Province != null)
             {
-                eartquakeQuery = eartquakeQuery.Where(c => String.Equals(c.Province, request.Province, StringComparison.CurrentCultureIgnoreCase));
+                eartquakeQuery = eartquakeQuery.Where(c => c.Province.ToLower() == request.Province.ToLower());
             }
 
             if (request.District != null)
             {
-                eartquakeQuery = eartquakeQuery.Where(c => String.Equals(c.District, request.District, StringComparison.CurrentCultureIgnoreCase));
+                eartquakeQuery = eartquakeQuery.Where(c => c.District.ToLower() == request.District.ToLower());
             }
+
+            eartquakeQuery = sort == "ASC" ? eartquakeQuery.OrderBy(c => c.Date) : eartquakeQuery.OrderByDescending(c => c.Date);
 
             var result = await eartquakeQuery.ProjectTo<EarthquakeDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
 

@@ -23,6 +23,7 @@ namespace MyVdsFactory.Application.Earthquakes.Queries.Dtos
         public string District { get; set; }
 
         public DateTime Date { get; set; }
+        
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Earthquake, EarthquakeDto>();

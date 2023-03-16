@@ -37,7 +37,8 @@ namespace MyVdsFactory.API.Controllers
                 Location = model.Location,
                 Country = model.Country,
                 Province = model.Province,
-                District = model.District
+                District = model.District,
+                SortBy = model.Sort
             }));
         }
 

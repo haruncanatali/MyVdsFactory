@@ -45,7 +45,10 @@ namespace MyVdsFactory.Application.Earthquakes.Commands.AddEarthquake
                     Country = request.Country,
                     Province = request.Province,
                     District = request.District,
-                    Date = request.Date
+                    Date = request.Date,
+                    Year = request.Date.Date.Year,
+                    Month = request.Date.Date.Month,
+                    Day = request.Date.Date.Day
                 }, cancellationToken);
 
                 return Result<long>.Success(1,"Deprem verisi başarıyla eklendi.");
