@@ -17,10 +17,7 @@ builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddCors(options =>
     options.AddPolicy("myclients", builder =>
-        builder.WithOrigins("https://localhost:7115")
-            .WithOrigins("http://localhost:5295")
-            .WithOrigins("http://localhost:5225")
-            .AllowAnyMethod().AllowAnyHeader()));
+        builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 builder.Services.AddHttpContextAccessor();
 
