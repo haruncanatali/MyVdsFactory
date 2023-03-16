@@ -34,22 +34,25 @@ namespace MyVdsFactory.Application.Earthquakes.Commands.UpdateEarthquake
 
             public async Task<Result<long>> Handle(UpdateEarthquakeCommand request, CancellationToken cancellationToken)
             {
-                var earlyResult = await _context.Earthquakes.SingleOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+                var result = await _context.Earthquakes.SingleOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
-                if (earlyResult == null)
+                if (result == null)
                 {
                     return Result<long>.Failure(new List<string>{"Deprem verisi veritabanında bulnamadı."});
                 }
 
-                earlyResult.Rms = request.Rms;
-                earlyResult.Latitude = request.Latitude;
-                earlyResult.Longitude = request.Longitude;
-                earlyResult.Magnitude = request.Magnitude;
-                earlyResult.Location = request.Location;
-                earlyResult.Country = request.Country;
-                earlyResult.Province = request.Province;
-                earlyResult.District = request.District;
-                earlyResult.Date = earlyResult.Date;
+                result.Rms = request.Rms;
+                result.Latitude = request.Latitude;
+                result.Longitude = request.Longitude;
+                result.Magnitude = request.Magnitude;
+                result.Location = request.Location;
+                result.Country = request.Country;
+                result.Province = request.Province;
+                result.District = request.District;
+                result.Date = request.Date;
+                result.Year = request.Date.Date.Year;
+                result.Month = request.Date.Date.Month;
+                result.Day = request.Date.Date.Day;
 
                 await _context.SaveChangesAsync(cancellationToken);
 

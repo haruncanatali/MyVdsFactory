@@ -131,6 +131,11 @@ namespace MyVdsFactory.Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("Day")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -154,6 +159,11 @@ namespace MyVdsFactory.Persistence.Migrations
                     b.Property<double>("Magnitude")
                         .HasColumnType("double precision");
 
+                    b.Property<int>("Month")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
                     b.Property<string>("Province")
                         .IsRequired()
                         .HasColumnType("text");
@@ -169,6 +179,11 @@ namespace MyVdsFactory.Persistence.Migrations
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("Year")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(2006);
 
                     b.HasKey("Id");
 

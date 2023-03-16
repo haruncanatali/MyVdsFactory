@@ -21,5 +21,6 @@ namespace MyVdsFactory.Application.Earthquakes.Queries.GetEarthquakeList
         public string? Country { get; set; }
         public string? Province { get; set; }
         public string? District { get; set; }
+        public string? SortBy { get; set; }
     }
 }

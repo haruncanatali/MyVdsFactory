@@ -39,6 +39,8 @@ namespace MyVdsFactory.Application.Earthquakes.Commands.AddEarthquakeWithExcel
                     {
                         if (rowItemIndex > 0)
                         {
+                            var date = DateTime.Parse(row.Cell(9)?.Value.ToString() ??
+                                                      DateTime.Now.ToString(CultureInfo.InvariantCulture));
                             earthquakes.Add(new Earthquake
                             {
                                 Rms = Convert.ToDouble(row.Cell(1)?.Value.ToString() ?? "0"),
@@ -49,7 +51,10 @@ namespace MyVdsFactory.Application.Earthquakes.Commands.AddEarthquakeWithExcel
                                 Country = row.Cell(6)?.Value.ToString() ?? "Uluslararası Sular",
                                 Province = row.Cell(7)?.Value.ToString() ?? "Uluslararası Sular",
                                 District = row.Cell(8)?.Value.ToString() ?? "Uluslararası Sular",
-                                Date = DateTime.Parse(row.Cell(9)?.Value.ToString() ?? DateTime.Now.ToString(CultureInfo.InvariantCulture))
+                                Date = date,
+                                Year = date.Date.Year,
+                                Month = date.Date.Month,
+                                Day = date.Date.Day
                             });
                         }
                         rowItemIndex++;

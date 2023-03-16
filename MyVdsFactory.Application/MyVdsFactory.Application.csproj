@@ -26,4 +26,10 @@
       <ProjectReference Include="..\MyVdsFactory.Domain\MyVdsFactory.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="ClosedXML">
+        <HintPath>..\MyVdsFactory.API\bin\Debug\net7.0\ClosedXML.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
