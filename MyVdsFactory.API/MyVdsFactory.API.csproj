@@ -28,4 +28,9 @@
       <ProjectReference Include="..\MyVdsFactory.Persistence\MyVdsFactory.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DataResources\Earthquake" />
+      <Folder Include="DataResources\ProvinceDistrict" />
+    </ItemGroup>
+
 </Project>
