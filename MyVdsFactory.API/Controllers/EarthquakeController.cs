@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyVdsFactory.API.Models;
+using MyVdsFactory.API.Services;
 using MyVdsFactory.Application.Earthquakes.Commands.AddEarthquake;
 using MyVdsFactory.Application.Earthquakes.Commands.AddEarthquakeWithExcel;
 using MyVdsFactory.Application.Earthquakes.Commands.DeleteEarthquake;
@@ -11,6 +12,13 @@ namespace MyVdsFactory.API.Controllers
 {
     public class EarthquakeController : BaseController
     {
+        private readonly IFileServices _fileServices;
+
+        public EarthquakeController(IFileServices fileServices)
+        {
+            _fileServices = fileServices;
+        }
+
         [HttpGet]
         [Route("get")]
         public async Task<ActionResult<GetEarthquakeVm>> Get(long id)
@@ -53,10 +61,16 @@ namespace MyVdsFactory.API.Controllers
         [Route("addExcel")]
         public async Task<IActionResult> AddExcel(IFormFile excelFile)
         {
-            return Ok(await Mediator.Send(new AddEarthquakeWithExcelCommand
+            var copyResult = await _fileServices.SaveFile(excelFile, ModalPaths.EarthQuake);
+            if (copyResult)
             {
-                ExcelFile = excelFile
-            }));
+                return Ok(await Mediator.Send(new AddEarthquakeWithExcelCommand
+                {
+                    ExcelFile = excelFile
+                }));
+            }
+
+            return BadRequest("Dosya kopyalanamadı.");
         }
 
         [HttpPost]
