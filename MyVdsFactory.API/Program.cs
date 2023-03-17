@@ -13,7 +13,8 @@ builder.Services.AddAuthenticationConfig(builder.Configuration);
 builder.Services.AddSwaggerConfig();
 builder.Services.AddSettingsConfig(builder.Configuration);
 
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>(); 
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddTransient<IFileServices,FileServices>();
 
 builder.Services.AddCors(options =>
     options.AddPolicy("myclients", builder =>

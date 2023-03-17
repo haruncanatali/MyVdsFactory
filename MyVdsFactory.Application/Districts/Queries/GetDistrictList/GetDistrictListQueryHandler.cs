@@ -31,7 +31,7 @@ public class GetDistrictListQueryHandler : IRequestHandler<GetDistrictListQuery,
 
         if (request.CityName.IsNullOrEmpty().Equals(false))
         {
-            query = query.Where(c => c.City.Name.ToLower() == request.CityName.ToLower());
+            query = query.Where(c => c.City.Name.ToLower() == request.CityName!.ToLower());
         }
 
         var result = await query.ProjectTo<DistrictDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
