@@ -69,13 +69,6 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 app.UseSerilogRequestLogging();
 app.UseHttpLogging();
 
-app.UseExceptionHandler(c => c.Run(async context =>
-{
-    var exception = context.Features.Get<IExceptionHandlerPathFeature>().Error;
-    var response = new { error = exception.Message };
-    await context.Response.WriteAsJsonAsync(response);
-}));
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -85,6 +78,8 @@ app.UseHttpsRedirection();
 app.UseCors("myclients");
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>());
 
 app.Use(async (context, next) =>
 {
