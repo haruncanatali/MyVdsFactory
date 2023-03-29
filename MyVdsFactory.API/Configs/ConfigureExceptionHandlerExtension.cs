@@ -11,10 +11,6 @@ public static class ConfigureExceptionHandlerExtension
     {
         app.UseExceptionHandler(c => c.Run(async context =>
         {
-            /*var exception = context.Features.Get<IExceptionHandlerPathFeature>().Error;
-            var response = new { error = exception.Message };
-            await context.Response.WriteAsJsonAsync(response);*/
-
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             context.Response.ContentType = MediaTypeNames.Application.Json;
 
