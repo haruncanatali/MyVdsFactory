@@ -23,6 +23,7 @@ public class CityController : BaseController
     [HttpPost]
     [Route("addExcel")]
     [AllowAnonymous]
+    [DisableRequestSizeLimit]
     public async Task<IActionResult> AddExcel(IFormFile excelFile)
     {
         var copyResult = await _fileServices.SaveFile(excelFile, ModalPaths.ProvinceDistrict);
@@ -50,7 +51,7 @@ public class CityController : BaseController
     
     [HttpGet]
     [Route("list")]
-    public async Task<ActionResult<GetCityListVm>> GetAll([FromQuery] string cityName)
+    public async Task<ActionResult<GetCityListVm>> GetAll([FromQuery] string? cityName)
     {
         return Ok(await Mediator.Send(new GetCityListQuery
         {
