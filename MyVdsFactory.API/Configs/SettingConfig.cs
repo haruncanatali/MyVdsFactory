@@ -10,7 +10,6 @@ public static class SettingsConfig
     {
         System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR");
         
-        services.AddTransient<ClaimManager>();
         services.AddTransient<TokenManager>();
         services.Configure<TokenSettings>(configuration.GetSection("TokenSetting"));
 

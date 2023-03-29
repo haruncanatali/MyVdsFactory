@@ -30,6 +30,7 @@ public class TokenManager
         if (!string.IsNullOrEmpty(responseRole))
         {
             claims.Add(new Claim(ClaimTypes.Role, responseRole));
+            claims.Add(new Claim(ClaimTypes.Name,appUser.UserName));
         }
         
         SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenSettings.Key));

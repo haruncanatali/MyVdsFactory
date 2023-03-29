@@ -24,7 +24,7 @@ public class GetDistrictListQueryHandler : IRequestHandler<GetDistrictListQuery,
     {
         var query = _context.Districts.Include(c => c.City) as IQueryable<District>;
 
-        if (request.CityId != 0)
+        if (request.CityId != null)
         {
             query = query.Where(c => c.CityId == request.CityId);
         }

@@ -11,6 +11,7 @@ public interface IApplicationContext
     public DbSet<Earthquake> Earthquakes { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<District> Districts { get; set; }
+    public DbSet<Terror> Terrors { get; set; }
     
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

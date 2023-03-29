@@ -59,6 +59,7 @@ namespace MyVdsFactory.API.Controllers
 
         [HttpPost]
         [Route("addExcel")]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> AddExcel(IFormFile excelFile)
         {
             var copyResult = await _fileServices.SaveFile(excelFile, ModalPaths.EarthQuake);

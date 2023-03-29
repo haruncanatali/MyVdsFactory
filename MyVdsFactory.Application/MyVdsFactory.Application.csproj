@@ -20,6 +20,11 @@
 
     <ItemGroup>
       <Folder Include="Auth\Commands" />
+      <Folder Include="Terrors\Commands\AddTerrorCommand" />
+      <Folder Include="Terrors\Commands\DeleteTerrorCommand" />
+      <Folder Include="Terrors\Commands\UpdateTerrorCommand" />
+      <Folder Include="Terrors\Queries\GetTerror" />
+      <Folder Include="Terrors\Queries\GetTerrorList" />
     </ItemGroup>
 
     <ItemGroup>
