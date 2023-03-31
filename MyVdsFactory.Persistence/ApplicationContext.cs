@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MyVdsFactory.Application.Common.Interfaces;
 using MyVdsFactory.Domain.Entities;
 
@@ -43,6 +42,9 @@ public class ApplicationContext : IdentityDbContext<User, Role, long, IdentityUs
         public DbSet<City> Cities { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Terror> Terrors { get; set; }
+        public DbSet<Horoscope> Horoscopes { get; set; }
+        public DbSet<HoroscopeCommentary> HoroscopeCommentaries { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         #endregion
 
