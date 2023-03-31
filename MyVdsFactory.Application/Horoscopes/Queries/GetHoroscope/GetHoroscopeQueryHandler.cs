@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using MyVdsFactory.Application.Accounts.Queries.Dtos;
 using MyVdsFactory.Application.Common.Interfaces;
 using MyVdsFactory.Application.Horoscopes.Queries.Dtos;
+using MyVdsFactory.Domain.Entities;
+using Account = CloudinaryDotNet.Account;
 
 namespace MyVdsFactory.Application.Horoscopes.Queries.GetHoroscope;
 
