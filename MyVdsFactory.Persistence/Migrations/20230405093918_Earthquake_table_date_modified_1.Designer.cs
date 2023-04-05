@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyVdsFactory.Persistence;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyVdsFactory.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230405093918_Earthquake_table_date_modified_1")]
+    partial class Earthquake_table_date_modified_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -293,11 +296,6 @@ namespace MyVdsFactory.Persistence.Migrations
                     b.Property<string>("Province")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<long>("ReferenceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasDefaultValue(0L);
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");

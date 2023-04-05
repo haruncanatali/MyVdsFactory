@@ -39,9 +39,9 @@ public class HoroscopeCommentaryController : BaseController
     
     [HttpPost]
     [Route("add-range-with-html")]
-    public async Task<IActionResult> Add(AddRangeHoroscopeCommentaryWithHtmlCommand command)
+    public async Task<IActionResult> Add()
     {
-        return Ok(await Mediator.Send(command));
+        return Ok(await Mediator.Send(new AddRangeHoroscopeCommentaryWithHtmlCommand()));
     }
     
     [HttpPost]

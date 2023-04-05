@@ -15,12 +15,24 @@ public static class SchedulerConfig
             q.AddTrigger(opts => opts
                 .ForJob(jobKey)
                 .WithIdentity("SchedulerHoroscopeCommentariesFromHtml-trigger")
-                //.WithCronSchedule("0 0 6 ? * *")
-                .WithCronSchedule("0 57 10 ? * *")
+                .WithCronSchedule("0 0 8 ? * *")
+            );
+        });
+        
+        services.AddQuartz(q =>
+        {
+            q.UseMicrosoftDependencyInjectionScopedJobFactory();
+            var jobKey = new JobKey("SchedulerEarthquakesFromHtml");
+            q.AddJob<EarthquakeBackgroundService>(opts => opts.WithIdentity(jobKey));
+            q.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity("SchedulerEarthquakesFromHtml-trigger")
+                .WithCronSchedule("0 * * ? * *")
             );
         });
         
         services.AddTransient<HoroscopeBackgroundService>();
+        services.AddTransient<EarthquakeBackgroundService>();
         services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
         return services;
     }

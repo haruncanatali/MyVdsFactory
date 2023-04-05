@@ -13,14 +13,14 @@ namespace MyVdsFactory.Application.Earthquakes.Commands.AddEarthquake
 {
     public class AddEarthquakeCommand : IRequest<Result<long>>
     {
-        public double Rms { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public double Magnitude { get; set; }
+        public decimal Depth { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
+        public decimal Magnitude { get; set; }
         public string Location { get; set; }
-        public string Country { get; set; }
         public string Province { get; set; }
         public string District { get; set; }
+        public string Type { get; set; }
         public DateTime Date { get; set; }
 
 
@@ -37,14 +37,14 @@ namespace MyVdsFactory.Application.Earthquakes.Commands.AddEarthquake
             {
                 await _context.Earthquakes.AddAsync(new Earthquake
                 {
-                    Rms = request.Rms,
+                    Depth = request.Depth,
                     Latitude = request.Latitude,
                     Longitude = request.Longitude,
                     Magnitude = request.Magnitude,
                     Location = request.Location,
-                    Country = request.Country,
                     Province = request.Province,
                     District = request.District,
+                    Type = request.Type,
                     Date = request.Date,
                     Year = request.Date.Date.Year,
                     Month = request.Date.Date.Month,

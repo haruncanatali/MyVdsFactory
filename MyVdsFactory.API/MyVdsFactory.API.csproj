@@ -34,7 +34,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DataResources\Earthquake" />
       <Folder Include="DataResources\Horoscope" />
       <Folder Include="DataResources\ProvinceDistrict" />
       <Folder Include="DataResources\Terror" />

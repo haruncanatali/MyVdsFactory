@@ -2,7 +2,7 @@
 using MyVdsFactory.API.Models;
 using MyVdsFactory.API.Services;
 using MyVdsFactory.Application.Earthquakes.Commands.AddEarthquake;
-using MyVdsFactory.Application.Earthquakes.Commands.AddEarthquakeWithExcel;
+using MyVdsFactory.Application.Earthquakes.Commands.AddEarthquakeWithHtml;
 using MyVdsFactory.Application.Earthquakes.Commands.DeleteEarthquake;
 using MyVdsFactory.Application.Earthquakes.Commands.UpdateEarthquake;
 using MyVdsFactory.Application.Earthquakes.Queries.GetEarthquake;
@@ -12,13 +12,6 @@ namespace MyVdsFactory.API.Controllers
 {
     public class EarthquakeController : BaseController
     {
-        private readonly IFileServices _fileServices;
-
-        public EarthquakeController(IFileServices fileServices)
-        {
-            _fileServices = fileServices;
-        }
-
         [HttpGet]
         [Route("get")]
         public async Task<ActionResult<GetEarthquakeVm>> Get(long id)
@@ -38,12 +31,12 @@ namespace MyVdsFactory.API.Controllers
                 StartTime = model.StartTime,
                 EndTime = model.EndTime,
                 Date = model.Date,
-                Rms = model.Rms,
+                Depth = model.Depth,
                 Latitude = model.Latitude,
                 Longitude = model.Longitude,
                 Magnitude = model.Magnitude,
                 Location = model.Location,
-                Country = model.Country,
+                Type = model.Type,
                 Province = model.Province,
                 District = model.District,
                 SortBy = model.Sort
@@ -58,23 +51,6 @@ namespace MyVdsFactory.API.Controllers
         }
 
         [HttpPost]
-        [Route("addExcel")]
-        [DisableRequestSizeLimit]
-        public async Task<IActionResult> AddExcel(IFormFile excelFile)
-        {
-            var copyResult = await _fileServices.SaveFile(excelFile, ModalPaths.EarthQuake);
-            if (copyResult)
-            {
-                return Ok(await Mediator.Send(new AddEarthquakeWithExcelCommand
-                {
-                    ExcelFile = excelFile
-                }));
-            }
-
-            return BadRequest("Dosya kopyalanamadı.");
-        }
-
-        [HttpPost]
         [Route("update")]
         public async Task<IActionResult> Update(UpdateEarthquakeCommand command)
         {
@@ -86,6 +62,13 @@ namespace MyVdsFactory.API.Controllers
         public async Task<IActionResult> Delete(DeleteEarthquakeCommand command)
         {
             return Ok(await Mediator.Send(command));
+        }
+        
+        [HttpPost]
+        [Route("add-with-html")]
+        public async Task<IActionResult> Add()
+        {
+            return Ok(await Mediator.Send(new AddEarthquakeWithHtmlCommand()));
         }
     }
 }

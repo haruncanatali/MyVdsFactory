@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyVdsFactory.API.Models;
 using MyVdsFactory.API.Services;
-using MyVdsFactory.Application.Earthquakes.Commands.AddEarthquakeWithExcel;
-using MyVdsFactory.Application.HoroscopeCommentaries.Commands.AddRangeHoroscopeCommentaryWithHtml;
 using MyVdsFactory.Application.Horoscopes.Commands.AddHoroscopeCommand;
 using MyVdsFactory.Application.Horoscopes.Commands.AddHoroscopeWithExcelCommand;
 using MyVdsFactory.Application.Horoscopes.Commands.DeleteHoroscopeCommand;
