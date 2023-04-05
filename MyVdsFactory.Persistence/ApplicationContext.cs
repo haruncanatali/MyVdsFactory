@@ -45,6 +45,7 @@ public class ApplicationContext : IdentityDbContext<User, Role, long, IdentityUs
         public DbSet<Horoscope> Horoscopes { get; set; }
         public DbSet<HoroscopeCommentary> HoroscopeCommentaries { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Prayer> Prayers { get; set; }
 
         #endregion
 
