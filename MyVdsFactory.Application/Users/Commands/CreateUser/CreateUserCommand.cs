@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MyVdsFactory.Application.Common.Interfaces;
 using MyVdsFactory.Application.Common.Models;
 using MyVdsFactory.Domain.Entities;
@@ -24,12 +25,14 @@ public class CreateUserCommand : IRequest<Result<long>>
             private readonly UserManager<User> _userManager;
             private readonly RoleManager<Role> _roleManager;
             private readonly IApplicationContext _context;
+            private readonly ILogger<CreateUserCommand> _logger;
 
-            public Handler(UserManager<User> userManager, RoleManager<Role> roleManager,IApplicationContext context)
+            public Handler(UserManager<User> userManager, RoleManager<Role> roleManager,IApplicationContext context, ILogger<CreateUserCommand> logger)
             {
                 _userManager = userManager;
                 _roleManager = roleManager;
                 _context = context;
+                _logger = logger;
             }
 
             public async Task<Result<long>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -63,6 +66,8 @@ public class CreateUserCommand : IRequest<Result<long>>
                     }
 
                     await _userManager.CreateAsync(entity, password);
+                    
+                    _logger.LogInformation("Kullanıcı ekleme girişimi başarılı oldu.");
 
 
                     if (request.RoleNames is { Count: > 0 })
@@ -76,7 +81,26 @@ public class CreateUserCommand : IRequest<Result<long>>
                             }
                         }
                     }
+                    else
+                    {
+                        setRole:
+                        Role? role = await _roleManager.FindByNameAsync("Normal");
+                        if (role != null)
+                        {
+                            await _userManager.AddToRoleAsync(entity, role.Name!);
+                        }
+                        else
+                        {
+                            await _roleManager.CreateAsync(new Role
+                            {
+                                Name = "Normal"
+                            });
+                            goto setRole;
+                        }
+                    }
                     
+                    _logger.LogInformation("Kullanıcıya rol ekleme girişimi başarılı oldu.");
+
                     return Result<long>.Success(entity.Id,"Kullanıcı başarıyla oluşturuldu.");
                 }
                 catch (Exception e)
