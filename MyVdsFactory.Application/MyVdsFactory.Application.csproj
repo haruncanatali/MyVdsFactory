@@ -22,12 +22,6 @@
 
     <ItemGroup>
       <Folder Include="Auth\Commands" />
-      <Folder Include="Tarots\Commands\AddTarot" />
-      <Folder Include="Tarots\Commands\DeleteTarot" />
-      <Folder Include="Tarots\Commands\UpdateTarot" />
-      <Folder Include="Tarots\Queries\Dtos" />
-      <Folder Include="Tarots\Queries\GetTarot" />
-      <Folder Include="Tarots\Queries\GetTarots" />
       <Folder Include="Terrors\Commands\AddTerrorCommand" />
       <Folder Include="Terrors\Commands\DeleteTerrorCommand" />
       <Folder Include="Terrors\Commands\UpdateTerrorCommand" />
