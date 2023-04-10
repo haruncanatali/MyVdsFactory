@@ -8,6 +8,7 @@ using MyVdsFactory.Application.Cities.Commands.DeleteCityCommand;
 using MyVdsFactory.Application.Cities.Commands.UpdateCityCommand;
 using MyVdsFactory.Application.Cities.Queries.GetCity;
 using MyVdsFactory.Application.Cities.Queries.GetCityList;
+using MyVdsFactory.Application.Cities.Queries.GetCityListWithoutDistricts;
 
 namespace MyVdsFactory.API.Controllers;
 
@@ -46,6 +47,16 @@ public class CityController : BaseController
         return Ok(await Mediator.Send(new GetCityQuery
         {
             Id = id
+        }));
+    }
+    
+    [HttpGet]
+    [Route("getWithoutDistricts")]
+    public async Task<ActionResult<GetCityVm>> GetWithoutDistricts(string? name)
+    {
+        return Ok(await Mediator.Send(new GetCityListWithoutDistrictsQuery
+        {
+            Name = name
         }));
     }
     

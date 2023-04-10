@@ -16,6 +16,7 @@ public interface IApplicationContext
     public DbSet<HoroscopeCommentary> HoroscopeCommentaries { get; set; }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Prayer> Prayers { get; set; }
+    public DbSet<Tarot> Tarots { get; set; }
     
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

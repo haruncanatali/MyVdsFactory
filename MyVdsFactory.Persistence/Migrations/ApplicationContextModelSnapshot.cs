@@ -442,6 +442,9 @@ namespace MyVdsFactory.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<long>("CityId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -487,6 +490,8 @@ namespace MyVdsFactory.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Prayers");
                 });
@@ -539,6 +544,56 @@ namespace MyVdsFactory.Persistence.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("MyVdsFactory.Domain.Entities.Tarot", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Features")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhotoUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tarots");
                 });
 
             modelBuilder.Entity("MyVdsFactory.Domain.Entities.Terror", b =>
@@ -910,6 +965,17 @@ namespace MyVdsFactory.Persistence.Migrations
                     b.Navigation("Horoscope");
                 });
 
+            modelBuilder.Entity("MyVdsFactory.Domain.Entities.Prayer", b =>
+                {
+                    b.HasOne("MyVdsFactory.Domain.Entities.City", "City")
+                        .WithMany("Prayers")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
             modelBuilder.Entity("MyVdsFactory.Domain.Entities.UserRole", b =>
                 {
                     b.HasOne("MyVdsFactory.Domain.Entities.Role", null)
@@ -928,6 +994,8 @@ namespace MyVdsFactory.Persistence.Migrations
             modelBuilder.Entity("MyVdsFactory.Domain.Entities.City", b =>
                 {
                     b.Navigation("Districts");
+
+                    b.Navigation("Prayers");
                 });
 
             modelBuilder.Entity("MyVdsFactory.Domain.Entities.Horoscope", b =>

@@ -17,5 +17,9 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
             .WithOne(c => c.City)
             .HasForeignKey(c => c.CityId)
             .OnDelete(DeleteBehavior.Cascade);
+        builder.HasMany(c => c.Prayers)
+            .WithOne(c => c.City)
+            .HasForeignKey(c => c.CityId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

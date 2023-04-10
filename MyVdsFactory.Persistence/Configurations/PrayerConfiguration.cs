@@ -18,5 +18,6 @@ public class PrayerConfiguration : IEntityTypeConfiguration<Prayer>
         builder.Property(c => c.Asr).IsRequired();
         builder.Property(c => c.Maghrib).IsRequired();
         builder.Property(c => c.Isha).IsRequired();
+        builder.Property(c => c.CityId).IsRequired();
     }
 }
