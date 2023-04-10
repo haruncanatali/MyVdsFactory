@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MyVdsFactory.Application.Common.Extensions;
@@ -17,6 +18,12 @@ public static class StringExtensions
         }
  
         return result;
+    }
+
+    public static string HtmlDecodeToString(this string value)
+    {
+        if (value.IsNullOrEmpty() || string.IsNullOrWhiteSpace(value)) return "";
+        return System.Net.WebUtility.HtmlDecode(value);
     }
 
     public static List<string> GetMonthsByTurkishName()
