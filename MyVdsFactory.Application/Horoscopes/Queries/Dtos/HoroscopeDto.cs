@@ -17,13 +17,13 @@ public class HoroscopeDto : IMapFrom<Horoscope>
     public string Planet { get; set; }
     public string Group { get; set; }
     
-    public List<HoroscopeCommentaryDto> HoroscopeCommentaries { get; set; }
+    public HoroscopeCommentaryDto? HoroscopeCommentary { get; set; }
 
     public void Mapping(Profile profile)
     {
         profile.CreateMap<Horoscope, HoroscopeDto>()
-            .ForMember(dest => dest.HoroscopeCommentaries,
+            .ForMember(dest => dest.HoroscopeCommentary,
                 opt => 
-                opt.MapFrom(c=>c.HoroscopeCommentaries));
+                opt.MapFrom(c=>c.HoroscopeCommentaries.FirstOrDefault(c=>c.Date.Date == DateTime.Now.Date)));
     }
 }

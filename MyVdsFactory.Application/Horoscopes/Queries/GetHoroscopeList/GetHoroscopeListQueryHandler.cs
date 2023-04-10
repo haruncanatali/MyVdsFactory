@@ -35,6 +35,7 @@ public class GetHoroscopeListQueryHandler : IRequestHandler<GetHoroscopeListQuer
         }    
             
         var result = await query
+            .OrderBy(c=>c.Id)
             .Include(c => c.HoroscopeCommentaries)
             .ProjectTo<HoroscopeDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
@@ -53,8 +54,14 @@ public class GetHoroscopeListQueryHandler : IRequestHandler<GetHoroscopeListQuer
             
             result.ForEach(c =>
             {
-                c.PhotoUrl = new Cloudinary(new Account(cloudName?.ObjectValue, apiKey?.ObjectValue, apiSecret?.ObjectValue))?.Api.UrlImgUp
-                    .Transform(new Transformation().Width(150).Height(150).Crop("fill")).BuildUrl(c.PhotoName);
+                c.PhotoUrl = new Cloudinary(new Account(cloudName?.ObjectValue, apiKey?.ObjectValue, apiSecret?.ObjectValue))?.Api
+                    .UrlImgUp
+                    .BuildUrl(c.PhotoName)
+                    .Insert(4, "s")
+                    .Replace("%2C",",")
+                    .Replace("%0","")
+                    .Replace("v1/","")
+                    .Replace("Aw_1000","w_1000");
             });
         }
         

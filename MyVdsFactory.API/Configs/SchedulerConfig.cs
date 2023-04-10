@@ -30,9 +30,22 @@ public static class SchedulerConfig
                 .WithCronSchedule("0 * * ? * *")
             );
         });
+
+        services.AddQuartz(q =>
+        {
+            q.UseMicrosoftDependencyInjectionScopedJobFactory();
+            var jobKey = new JobKey("SchedulerPrayerTimesFromHtml");
+            q.AddJob<PrayerTimeBackgroundService>(opts => opts.WithIdentity(jobKey));
+            q.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity("SchedulerPrayerTimesFromHtml-trigger")
+                .WithCronSchedule("0 5 0 1 1 ? *")
+            );
+        });
         
         services.AddTransient<HoroscopeBackgroundService>();
         services.AddTransient<EarthquakeBackgroundService>();
+        services.AddTransient<PrayerTimeBackgroundService>();
         services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
         return services;
     }

@@ -9,4 +9,8 @@ public class Prayer : BaseEntity
     public string Asr { get; set; } // Ikindi
     public string Maghrib { get; set; } // Aksam
     public string Isha { get; set; } // yatsi
+
+    public long CityId { get; set; }
+
+    public City City { get; set; }
 }
