@@ -65,11 +65,11 @@ public class GetRandomBooksWithChallengeQueryHandler : IRequestHandler<GetRandom
     
     private async Task Shuffle<T>(List<T> list) 
     {
-        Random rand = new Random();
+        Random random = new Random();
         int n = list.Count;
         while (n > 1) {
             n--;
-            int k = rand.Next(n + 1);
+            int k = random.Next(n + 1);
             (list[k], list[n]) = (list[n], list[k]);
         }
     }
