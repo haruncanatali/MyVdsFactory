@@ -22,7 +22,7 @@ public class TerrorController : BaseController
     [DisableRequestSizeLimit]
     public async Task<IActionResult> AddExcel(IFormFile excelFile)
     {
-        var copyResult = await _fileService.SaveFile(excelFile, ModalPaths.Terror);
+        var copyResult = await _fileService.SaveFileAsync(excelFile, ModalPaths.Terror);
 
         if (copyResult)
         {

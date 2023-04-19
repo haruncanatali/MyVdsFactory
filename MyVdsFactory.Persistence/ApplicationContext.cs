@@ -47,6 +47,8 @@ public class ApplicationContext : IdentityDbContext<User, Role, long, IdentityUs
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Prayer> Prayers { get; set; }
         public DbSet<Tarot> Tarots { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
 
         #endregion
 

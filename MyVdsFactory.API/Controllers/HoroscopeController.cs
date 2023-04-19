@@ -62,7 +62,7 @@ public class HoroscopeController : BaseController
     [DisableRequestSizeLimit]
     public async Task<IActionResult> AddExcel(IFormFile excelFile)
     {
-        var copyResult = await _fileServices.SaveFile(excelFile, ModalPaths.Horoscope);
+        var copyResult = await _fileServices.SaveFileAsync(excelFile, ModalPaths.Horoscope);
         if (copyResult)
         {
             return Ok(await Mediator.Send(new AddHoroscopeWithExcelCommand

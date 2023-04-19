@@ -9,7 +9,7 @@ public class FileServices : IFileServices
         _environment = environment;
     }
 
-    public async Task<bool> SaveFile(IFormFile file,string modalPath)
+    public async Task<bool> SaveFileAsync(IFormFile file,string modalPath)
     {
         try
         {
@@ -25,6 +25,25 @@ public class FileServices : IFileServices
         catch (Exception e)
         {
             return false;
+        }
+    }
+
+    public async Task<string?> SaveFileAsyncWithReturnFilePath(IFormFile file, string modalPath)
+    {
+        try
+        {
+            string directoryPath = Path.Combine(_environment.ContentRootPath, $"DataResources/{modalPath}");
+            string filePath = Path.Combine(directoryPath, file.FileName);
+            using (var stream = new FileStream(filePath,FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return filePath;
+        }
+        catch (Exception e)
+        {
+            return null;
         }
     }
 }
