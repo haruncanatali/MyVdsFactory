@@ -27,7 +27,7 @@ public class CityController : BaseController
     [DisableRequestSizeLimit]
     public async Task<IActionResult> AddExcel(IFormFile excelFile)
     {
-        var copyResult = await _fileServices.SaveFile(excelFile, ModalPaths.ProvinceDistrict);
+        var copyResult = await _fileServices.SaveFileAsync(excelFile, ModalPaths.ProvinceDistrict);
 
         if (copyResult)
         {

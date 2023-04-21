@@ -17,6 +17,8 @@ public interface IApplicationContext
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Prayer> Prayers { get; set; }
     public DbSet<Tarot> Tarots { get; set; }
+    public DbSet<Author> Authors { get; set; }
+    public DbSet<Book> Books { get; set; }
     
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

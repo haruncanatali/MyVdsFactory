@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.HttpLogging;
 using MyVdsFactory.API.Configs;
 using MyVdsFactory.API.Configs.ColumnWriters;

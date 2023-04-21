@@ -34,6 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="DataResources\Book" />
       <Folder Include="DataResources\Horoscope" />
       <Folder Include="DataResources\ProvinceDistrict" />
       <Folder Include="DataResources\Terror" />
