@@ -12,6 +12,9 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
         builder.HasQueryFilter(c => c.Status == EntityStatus.Active);
 
         builder.Property(c => c.Name).IsRequired();
+        builder.Property(c => c.Latitude).HasDefaultValue(0).IsRequired();
+        builder.Property(c => c.Longitude).HasDefaultValue(0).IsRequired();
+        builder.Property(c => c.Population).HasDefaultValue(0).IsRequired();
 
         builder.HasMany(c => c.Districts)
             .WithOne(c => c.City)

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyVdsFactory.API.Models;
 using MyVdsFactory.API.Services;
 using MyVdsFactory.Application.Cities.Commands.AddCityCommand;
+using MyVdsFactory.Application.Cities.Commands.AddCityLatLongPopWithExcel;
 using MyVdsFactory.Application.Cities.Commands.AddCityWithExcel;
 using MyVdsFactory.Application.Cities.Commands.DeleteCityCommand;
 using MyVdsFactory.Application.Cities.Commands.UpdateCityCommand;
@@ -19,25 +20,6 @@ public class CityController : BaseController
     public CityController(IFileServices fileServices)
     {
         _fileServices = fileServices;
-    }
-
-    [HttpPost]
-    [Route("addExcel")]
-    [AllowAnonymous]
-    [DisableRequestSizeLimit]
-    public async Task<IActionResult> AddExcel(IFormFile excelFile)
-    {
-        var copyResult = await _fileServices.SaveFileAsync(excelFile, ModalPaths.ProvinceDistrict);
-
-        if (copyResult)
-        {
-            return Ok(await Mediator.Send(new AddCityWithExcelCommand
-            {
-                DataExcelFile = excelFile
-            }));
-        }
-
-        return BadRequest("Dosya kaydedilemedi.");
     }
     
     [HttpGet]
@@ -68,6 +50,42 @@ public class CityController : BaseController
         {
             Name = cityName
         }));
+    }
+    
+    [HttpPost]
+    [Route("addExcel")]
+    [DisableRequestSizeLimit]
+    public async Task<IActionResult> AddExcel(IFormFile excelFile)
+    {
+        var copyResult = await _fileServices.SaveFileAsync(excelFile, ModalPaths.ProvinceDistrict);
+
+        if (copyResult)
+        {
+            return Ok(await Mediator.Send(new AddCityWithExcelCommand
+            {
+                DataExcelFile = excelFile
+            }));
+        }
+
+        return BadRequest("Dosya kaydedilemedi.");
+    }
+    
+    [HttpPost]
+    [Route("addExcelCityFeatures")]
+    [DisableRequestSizeLimit]
+    public async Task<IActionResult> AddExcelCityFeatures(IFormFile excelFile)
+    {
+        var copyResult = await _fileServices.SaveFileAsync(excelFile, ModalPaths.ProvinceDistrict);
+
+        if (copyResult)
+        {
+            return Ok(await Mediator.Send(new AddCityLatLongPopWithExcelCommand()
+            {
+                ExcelDataFile = excelFile
+            }));
+        }
+
+        return BadRequest("Dosya kaydedilemedi.");
     }
     
     [HttpPost]
